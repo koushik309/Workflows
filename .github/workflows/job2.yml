@@ -1,0 +1,14 @@
+name: Execute Job2
+on:
+  workflow_dispatch:
+    inputs:
+      job1_output:
+        description: 'Output from Job1'
+        required: true
+
+jobs:
+  run-job2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: chmod +x job2.sh && ./job2.sh "${{ inputs.job1_output }}"
