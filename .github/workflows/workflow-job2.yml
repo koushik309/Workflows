@@ -1,0 +1,16 @@
+# Workflows/.github/workflows/workflow-job2.yml
+name: Workflow Job 2
+
+on:
+  workflow_call:
+    inputs:
+      job1_output:
+        required: true
+        type: string
+
+jobs:
+  runjob2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use output from job 1
+        run: echo "Received input: ${{ inputs.job1_output }}"
