@@ -15,6 +15,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Echo via action
-        uses: koushik309/Actions/.github/actions/echo-task@main
+        uses: koushik309/Actions/echo-task@main
         with:
           message: ${{ inputs.message }}
