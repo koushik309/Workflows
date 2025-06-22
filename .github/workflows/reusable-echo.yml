@@ -1,0 +1,20 @@
+name: Reusable Echo Workflow
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        required: true
+        type: string
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Echo via action
+        uses: koushik309/Actions/.github/actions/echo-task@main
+        with:
+          message: ${{ inputs.message }}
