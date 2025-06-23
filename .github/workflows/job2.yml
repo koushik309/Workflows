@@ -20,6 +20,7 @@ jobs:
         
       - name: Run Job2 Script
         run: |
+          cd workflow
           chmod +x job2.sh
           ./job2.sh "${{ inputs.job1_output }}" > output.txt
           

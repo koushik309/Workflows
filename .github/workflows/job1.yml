@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
   actions: write
-  checks: read  # Added for workflow run access
+  checks: read
 
 jobs:
   run-job1:
@@ -20,6 +20,8 @@ jobs:
         
       - name: Run Job1 Script
         run: |
+          # Use lowercase 'workflow' to match directory name
+          cd workflow
           chmod +x job1.sh
           ./job1.sh "${{ inputs.input_data }}" > output.txt
           
@@ -27,4 +29,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: job1-output
-          path: Workflow/output.txt
+          path: workflow/output.txt  # Corrected to lowercase
