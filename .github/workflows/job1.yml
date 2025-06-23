@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   actions: write
+  checks: read  # Added for workflow run access
 
 jobs:
   run-job1:
@@ -19,8 +20,6 @@ jobs:
         
       - name: Run Job1 Script
         run: |
-          # Navigate to the Workflow directory
-          cd Workflow
           chmod +x job1.sh
           ./job1.sh "${{ inputs.input_data }}" > output.txt
           
@@ -28,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: job1-output
-          path: Workflow/output.txt  # Correct path to the output file
+          path: Workflow/output.txt

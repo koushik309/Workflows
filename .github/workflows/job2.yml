@@ -7,8 +7,9 @@ on:
         required: true
 
 permissions:
-  contents: read
-  actions: read
+  contents: write
+  actions: write
+  checks: read
 
 jobs:
   run-job2:
@@ -19,7 +20,11 @@ jobs:
         
       - name: Run Job2 Script
         run: |
-          # Navigate to the Workflow directory
-          cd Workflow
           chmod +x job2.sh
-          ./job2.sh "${{ inputs.job1_output }}"
+          ./job2.sh "${{ inputs.job1_output }}" > output.txt
+          
+      - name: Upload Output
+        uses: actions/upload-artifact@v4
+        with:
+          name: job2-output
+          path: Workflow/output.txt
