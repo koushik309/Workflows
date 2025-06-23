@@ -6,13 +6,26 @@ on:
         description: 'Input data for Job1'
         required: true
 
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   run-job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: chmod +x job1.sh && ./job1.sh "${{ inputs.input_data }}" > output.txt
-      - uses: actions/upload-artifact@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Run Job1 Script
+        run: |
+          # Navigate to the Workflow directory
+          cd Workflow
+          chmod +x job1.sh
+          ./job1.sh "${{ inputs.input_data }}" > output.txt
+          
+      - name: Upload Output
+        uses: actions/upload-artifact@v4
         with:
           name: job1-output
-          path: output.txt
+          path: Workflow/output.txt  # Correct path to the output file

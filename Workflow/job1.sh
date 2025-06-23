@@ -1,4 +1,6 @@
 #!/bin/bash
-echo "Processing: $1"
-# Your processing logic here
-echo "JOB1_RESULT=$(echo $1 | tr '[:lower:]' '[:upper:]')"
+# Log processing message to stderr
+echo "Processing: $1" >&2
+
+# Actual processing - output ONLY result to stdout
+echo "$1" | tr '[:lower:]' '[:upper:]'
